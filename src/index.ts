@@ -9,6 +9,8 @@ import {
   handlerUsers,
 } from "./commands/users.js";
 import { handlerReset } from "./commands/reset.js";
+import { handlerAgg } from "./commands/agg.js";
+import { handlerAddFeed, handlerFeeds } from "./commands/feed.js";
 
 function initRegistry(): CommandsRegistry {
   const registry: CommandsRegistry = {};
@@ -16,6 +18,10 @@ function initRegistry(): CommandsRegistry {
   registerCommand(registry, "register", handlerRegister);
   registerCommand(registry, "reset", handlerReset);
   registerCommand(registry, "users", handlerUsers);
+  registerCommand(registry, "agg", handlerAgg);
+  registerCommand(registry, "addfeed", handlerAddFeed);
+  registerCommand(registry, "feeds", handlerFeeds);
+
   return registry;
 }
 
