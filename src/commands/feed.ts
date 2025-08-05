@@ -1,18 +1,15 @@
-import { readConfig } from "../config";
-import { createFeed, getFeeds } from "../lib/db/queries/feed";
-import { getUserByName } from "../lib/db/queries/users";
-import { Feed, User } from "../lib/db/schema";
+import { createFeedFollow } from "../lib/db/queries/feed_follows.js";
+import { createFeed, getFeeds } from "../lib/db/queries/feed.js";
+import { Feed, User } from "../lib/db/schema.js";
 
-export async function handlerAddFeed(_: string, ...args: string[]) {
+export async function handlerAddFeed(_: string, user: User, ...args: string[]) {
   if (args.length !== 2) {
     throw new Error("usage: addFeed <name> <url>");
   }
 
-  const currentUserName = readConfig().currentUserName;
-  const currentUser = await getUserByName(currentUserName);
-
-  const feed = await createFeed(args[0], args[1], currentUser.id);
-  printFeed(feed, currentUser);
+  const feed = await createFeed(args[0], args[1], user.id);
+  await createFeedFollow(feed.id, user.id);
+  printFeed(feed, user);
 }
 
 export function printFeed(feed: Feed, user: User) {

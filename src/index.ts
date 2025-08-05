@@ -11,6 +11,12 @@ import {
 import { handlerReset } from "./commands/reset.js";
 import { handlerAgg } from "./commands/agg.js";
 import { handlerAddFeed, handlerFeeds } from "./commands/feed.js";
+import { middlewareLoggedIn } from "./middlewares/loggedIn.js";
+import {
+  handlerFollow,
+  handlerUnfollow,
+  handlerFollowing,
+} from "./commands/feed_follows.js";
 
 function initRegistry(): CommandsRegistry {
   const registry: CommandsRegistry = {};
@@ -19,8 +25,11 @@ function initRegistry(): CommandsRegistry {
   registerCommand(registry, "reset", handlerReset);
   registerCommand(registry, "users", handlerUsers);
   registerCommand(registry, "agg", handlerAgg);
-  registerCommand(registry, "addfeed", handlerAddFeed);
+  registerCommand(registry, "addfeed", middlewareLoggedIn(handlerAddFeed));
   registerCommand(registry, "feeds", handlerFeeds);
+  registerCommand(registry, "follow", middlewareLoggedIn(handlerFollow));
+  registerCommand(registry, "following", middlewareLoggedIn(handlerFollowing));
+  registerCommand(registry, "unfollow", middlewareLoggedIn(handlerUnfollow));
 
   return registry;
 }

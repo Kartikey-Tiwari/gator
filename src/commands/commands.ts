@@ -1,4 +1,7 @@
-type CommandHandler = (cmdName: string, ...args: string[]) => Promise<void>;
+export type CommandHandler = (
+  cmdName: string,
+  ...args: string[]
+) => Promise<void>;
 
 export type CommandsRegistry = {
   [key: string]: CommandHandler;
@@ -17,5 +20,9 @@ export async function runCommand(
   cmdName: string,
   ...args: string[]
 ) {
+  if (!registry[cmdName]) {
+    console.log("Command does not exist!");
+    return;
+  }
   await registry[cmdName](cmdName, ...args);
 }
