@@ -19,7 +19,8 @@ type RSSItem = {
 export async function fetchFeed(feedURL: string) {
   const res = await fetch(feedURL, {
     headers: {
-      "user-agent": "gator",
+      "user-agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/115.0.0.0 Safari/537.36",
     },
   });
   const responseText = await res.text();

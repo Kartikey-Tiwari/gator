@@ -17,6 +17,7 @@ import {
   handlerUnfollow,
   handlerFollowing,
 } from "./commands/feed_follows.js";
+import { handleBrowse } from "./commands/posts.js";
 
 function initRegistry(): CommandsRegistry {
   const registry: CommandsRegistry = {};
@@ -30,6 +31,7 @@ function initRegistry(): CommandsRegistry {
   registerCommand(registry, "follow", middlewareLoggedIn(handlerFollow));
   registerCommand(registry, "following", middlewareLoggedIn(handlerFollowing));
   registerCommand(registry, "unfollow", middlewareLoggedIn(handlerUnfollow));
+  registerCommand(registry, "browse", middlewareLoggedIn(handleBrowse));
 
   return registry;
 }
