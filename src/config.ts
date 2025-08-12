@@ -1,10 +1,8 @@
 import path from "path";
 import fs from "fs";
 import os from "os";
-import dotenv from "dotenv";
 
-dotenv.config({ quiet: true });
-
+process.loadEnvFile(".env");
 const CFG_FILE_NAME = ".gatorconfig.json";
 const DB_URL = process.env.DB_URL;
 

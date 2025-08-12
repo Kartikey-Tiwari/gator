@@ -1,5 +1,5 @@
-import { getPostsForUser } from "src/lib/db/queries/posts";
-import { User } from "src/lib/db/schema";
+import { getPostsForUser } from "../lib/db/queries/posts.js";
+import { User } from "../lib/db/schema.js";
 
 export async function handleBrowse(_: string, user: User, ...args: string[]) {
   if (args.length > 1) {

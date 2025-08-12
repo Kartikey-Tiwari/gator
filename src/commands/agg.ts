@@ -1,4 +1,4 @@
-import { createPost, getPostByURL } from "src/lib/db/queries/posts.js";
+import { createPost, getPostByURL } from "../lib/db/queries/posts.js";
 import { getNextFeedToFetch, markFeedFetched } from "../lib/db/queries/feed.js";
 import { fetchFeed } from "../rss/fetchFeed.js";
 
